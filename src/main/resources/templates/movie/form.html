@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Movie Form</title>
 </head>
 <body>
-$END$
+  <h1>Movie Form</h1>
+  <form action="movies" method="Post">
+
+    <label for="movie.name">Name:</label>
+    <input id="movie.name" name="name" />
+    <br />
+
+    <label for="movie.release">Released:</label>
+    <input id="movie.release" name="release" />
+    <br />
+
+    <label for="movie.duration">Duration:</label>
+    <input id="movie.duration" name="duration" />
+    <br />
+
+    <label for="movie.genre">Genre:</label>
+    <input id="movie.genre" name="genre" />
+    <br />
+
+    <input type="submit" value="Submit" />
+  </form>
 </body>
 </html>
