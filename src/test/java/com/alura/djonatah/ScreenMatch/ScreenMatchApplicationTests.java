@@ -1,4 +1,4 @@
-package org.djonatah.ScreenMatch;
+package br.com.alura.djonatah.ScreenMatch;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
