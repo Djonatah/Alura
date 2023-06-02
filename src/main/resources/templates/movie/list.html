@@ -5,6 +5,7 @@
       layout:decorate="~{template.html}">
 <head>
     <title>Movie List</title>
+
 </head>
 <body>
   <div layout:fragment="content">
@@ -17,14 +18,24 @@
           <th>Release Date</th>
           <th>Duration</th>
           <th>Genre</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr th:each="movie: ${list}">
           <td th:text="${movie.name}"></td>
-          <td th:text="${movie.release}"></td>
+          <td th:text="${movie.releaseDate}"></td>
           <td th:text="${movie.duration}"></td>
           <td th:text="${movie.genre}"></td>
+          <td>
+            <a th:href="@{/movies/form?id={id}(id=${movie.id})}">Editar</a>
+
+            <form action="/movies" method="POST">
+              <input type="hidden" name="_method" value="DELETE" />
+              <input type="hidden" name="id" th:value="${movie.id}" />
+              <input type="submit" value="Delete" />
+            </form>
+          </td>
         </tr>
       </tbody>
     </table>
