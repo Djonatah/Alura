@@ -1,4 +1,4 @@
-package com.alura.djonatah.api;
+package com.alura.djonatah.medvollapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

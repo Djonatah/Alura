@@ -1,4 +1,4 @@
-package com.alura.djonatah.api;
+package com.alura.djonatah.medvollapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
