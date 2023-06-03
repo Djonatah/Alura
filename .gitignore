@@ -1,6 +1,6 @@
-HELP.md
+ScreenMatch/HELP.md
 target/
-!.mvn/wrapper/maven-wrapper.jar
+!ScreenMatch/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
