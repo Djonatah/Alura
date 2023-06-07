@@ -1,4 +1,4 @@
-package com.alura.djonatah.medvollapi.domain.common;
+package com.alura.djonatah.medvollapi.domain.model.common;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;

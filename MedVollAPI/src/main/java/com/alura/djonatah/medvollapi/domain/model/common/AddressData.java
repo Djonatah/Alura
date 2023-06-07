@@ -1,19 +1,20 @@
-package com.alura.djonatah.medvollapi.domain.common;
+package com.alura.djonatah.medvollapi.domain.model.common;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 
 public record AddressData(
-                        @NotEmpty
+                        @NotBlank
                         String street,
-                        @NotEmpty
+                        @NotBlank
                         String zone,
-                        @NotEmpty
+                        @NotBlank
                         @Pattern(regexp = "\\d{5}")
                         String zip,
-                        @NotEmpty
+                        @NotBlank
                         String city,
-                        @NotEmpty
+                        @NotBlank
                         String state,
                         String additionalInfo,
                         String number) {

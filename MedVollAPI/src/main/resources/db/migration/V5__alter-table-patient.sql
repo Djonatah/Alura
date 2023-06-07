@@ -1,0 +1,1 @@
+alter table patient add active bit not null default true;

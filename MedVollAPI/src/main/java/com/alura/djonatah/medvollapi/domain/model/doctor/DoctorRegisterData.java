@@ -1,25 +1,25 @@
-package com.alura.djonatah.medvollapi.domain.Doctor;
+package com.alura.djonatah.medvollapi.domain.model.doctor;
 
-import com.alura.djonatah.medvollapi.domain.common.AddressData;
+import com.alura.djonatah.medvollapi.domain.model.common.AddressData;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
-public record DoctorData(@NotBlank
+public record DoctorRegisterData(@NotBlank
                          String name,
-                         @NotBlank
+                                 @NotBlank
                          @Pattern(regexp = "\\d{4,6}")
                          String register,
-                         @NotBlank
+                                 @NotBlank
                          String phone,
-                         @NotBlank
+                                 @NotBlank
                          @Email
                          String email,
-                         @NotNull
+                                 @NotNull
                          Speciality speciality,
-                         @NotNull
+                                 @NotNull
                          @Valid
                          AddressData address) {
 }

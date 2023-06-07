@@ -1,6 +1,6 @@
-package com.alura.djonatah.medvollapi.domain.Patient;
+package com.alura.djonatah.medvollapi.domain.model.patient;
 
-import com.alura.djonatah.medvollapi.domain.common.Address;
+import com.alura.djonatah.medvollapi.domain.model.common.Address;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +20,7 @@ public class Patient {
     private String ssn;
     private String phone;
     private String email;
+    private boolean active;
     @Embedded
     private Address address;
     public Patient(PatientData patientData){
@@ -28,5 +29,6 @@ public class Patient {
         this.phone = patientData.phone();
         this.email = patientData.email();
         this.address = new Address(patientData.address());
+        this.active = true;
     }
 }

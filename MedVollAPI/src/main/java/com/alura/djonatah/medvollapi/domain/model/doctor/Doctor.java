@@ -1,6 +1,6 @@
-package com.alura.djonatah.medvollapi.domain.Doctor;
+package com.alura.djonatah.medvollapi.domain.model.doctor;
 
-import com.alura.djonatah.medvollapi.domain.common.Address;
+import com.alura.djonatah.medvollapi.domain.model.common.Address;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,17 +19,19 @@ public class Doctor {
     private String email;
     private String phone;
     private String register;
-    @Enumerated
+    private boolean active;
+    @Enumerated(EnumType.STRING)
     private Speciality speciality;
     @Embedded
     private Address address;
 
-    public Doctor(DoctorData doctorData) {
+    public Doctor(DoctorRegisterData doctorData) {
         this.name = doctorData.name();
         this.email = doctorData.email();
         this.register = doctorData.register();
         this.phone = doctorData.phone();
         this.speciality = doctorData.speciality();
         this.address = new Address(doctorData.address());
+        this.active = true;
     }
 }

@@ -1,0 +1,1 @@
+alter table doctor add active bit not null default true;

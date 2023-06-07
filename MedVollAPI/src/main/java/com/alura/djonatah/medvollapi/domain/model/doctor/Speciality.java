@@ -1,4 +1,4 @@
-package com.alura.djonatah.medvollapi.domain.Doctor;
+package com.alura.djonatah.medvollapi.domain.model.doctor;
 
 public enum Speciality {
     ORTHOPEDICS,
