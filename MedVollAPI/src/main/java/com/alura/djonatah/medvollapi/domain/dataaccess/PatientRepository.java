@@ -1,4 +1,4 @@
-package com.alura.djonatah.medvollapi.domain.model.data;
+package com.alura.djonatah.medvollapi.domain.dataaccess;
 
 import com.alura.djonatah.medvollapi.domain.model.patient.Patient;
 import org.springframework.data.domain.Page;

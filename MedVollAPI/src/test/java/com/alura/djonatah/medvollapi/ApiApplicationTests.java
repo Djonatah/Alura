@@ -6,8 +6,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ApiApplicationTests {
 
+
+
 	@Test
 	void contextLoads() {
+		System.setProperty("JWT_SECRET", "foo");
 	}
 
 }

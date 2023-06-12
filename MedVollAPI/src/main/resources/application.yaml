@@ -9,3 +9,12 @@ spring:
     properties:
       hibernate:
           format_sql: false
+
+server:
+  error:
+    include-stacktrace: never
+
+medvollapi:
+  security:
+    token:
+      secret: ${JWT_SECRET:MySecret123}
