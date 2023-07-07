@@ -12,16 +12,14 @@ import java.time.LocalDateTime;
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     Page<Doctor> findAllByActiveTrue(Pageable pageable);
     @Query("""
-            select d 
+            select d
             from Doctor d
-            where 
-                d.active = 1
-                d.speciality = :speciality
-                and d.id not in (
-                    select a.doctor_id from appointment a where a.date = :appointmentDate
-                    )
-            order by rand() 
+            where
+                d.active = True
+                and d.speciality = :speciality
+                and d.id not in (select a.doctor.id from Appointment a where a.date = :appointmentDate)
+            order by rand()
             limit 1
             """)
-    public Doctor selectCalendarFreeDoctorForAppointment(Speciality speciality, LocalDateTime appointmentDate);
+    Doctor selectCalendarFreeDoctorForAppointment(Speciality speciality, LocalDateTime appointmentDate);
 }

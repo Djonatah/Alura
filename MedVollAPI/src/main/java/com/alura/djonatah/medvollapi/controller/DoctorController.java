@@ -23,7 +23,7 @@ public class DoctorController {
     @Transactional
     public ResponseEntity register(@RequestBody @Valid DoctorRegisterData doctorData, UriComponentsBuilder uriBuilder){
         Doctor doc = doctorService.create(doctorData);
-        var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(doc.getId()).toUri();
+        var uri = uriBuilder.path("/doctors/{id}").buildAndExpand(doc.getId()).toUri();
         return ResponseEntity.created(uri).body(new DoctorDetailData(doc));
     }
 

@@ -4,6 +4,7 @@ import com.alura.djonatah.medvollapi.domain.repositories.DoctorRepository;
 import com.alura.djonatah.medvollapi.domain.model.doctor.*;
 import com.alura.djonatah.medvollapi.domain.model.common.Address;
 import com.alura.djonatah.medvollapi.domain.model.common.AddressData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,8 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class DoctorService {
 
-    private
-    DoctorRepository doctorRepository;
+    @Autowired
+    private DoctorRepository doctorRepository;
 
     public DoctorService(DoctorRepository doctorRepository) {
         this.doctorRepository = doctorRepository;

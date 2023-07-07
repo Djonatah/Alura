@@ -25,30 +25,26 @@ public class AppointmentService {
     public void cancel(AppointmentCancelData cancelData) throws DataValidationException {
         if(! appointmentRepository.existsById(cancelData.appointmentId()))
             throw new DataValidationException("Unable to find appointment in db");
+
         var appointment = appointmentRepository.getReferenceById(cancelData.appointmentId());
         appointment.setCancelReason(cancelData.reason());
     }
 
-    public void schedule(AppointmentData appointmentData) throws DataValidationException {
-
+    public Appointment schedule(AppointmentData appointmentData) throws DataValidationException {
         var patient = getPatientFromDB(appointmentData.patientId());
-
         var doctor = selectDoctorForAppointment(appointmentData);
-
         var appointment = new Appointment(null,doctor, patient, appointmentData.date(), null);
-
         appointmentRepository.save(appointment);
-
+        return appointment;
     }
 
     private Patient getPatientFromDB(Long patientId) throws DataValidationException {
 
-        if(patientRepository.existsById(patientId)) {
+        if(! patientRepository.existsById(patientId)) {
             throw new DataValidationException("Unable to find patient in DB: " +patientId);
         }
 
         var patient = patientRepository.findById(patientId).get();
-
         if(! patient.isActive())
             throw new DataValidationException("Patient is set as disabled: " +patientId);
 
@@ -56,8 +52,6 @@ public class AppointmentService {
     }
 
     private Doctor selectDoctorForAppointment(AppointmentData appointmentData) throws DataValidationException {
-        Doctor doctor = null;
-
         if(appointmentData.doctorId() != null)
             return selectExistingDoctor(appointmentData);
         else
@@ -66,7 +60,6 @@ public class AppointmentService {
 
     private Doctor pickCalendarFreeDoctorForAppointment(AppointmentData appointmentData) throws DataValidationException {
         var doctor = doctorRepository.selectCalendarFreeDoctorForAppointment(appointmentData.speciality(), appointmentData.date());
-
         if(doctor == null){
             throw new DataValidationException("Unable to select doctor for appointment: " + appointmentData.patientId());
         }
@@ -75,7 +68,7 @@ public class AppointmentService {
 
     private Doctor selectExistingDoctor(AppointmentData appointmentData) throws DataValidationException {
         if(! doctorRepository.existsById(appointmentData.doctorId()))
-            throw new DataValidationException("Invalid patient for appointment: " + appointmentData.patientId());
+            throw new DataValidationException("Invalid doctor for appointment: " + appointmentData.doctorId());
         return doctorRepository.getReferenceById(appointmentData.doctorId());
     }
 }

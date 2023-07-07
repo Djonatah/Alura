@@ -16,7 +16,8 @@ public record PatientData(
         @NotBlank
         String phone,
         @NotBlank
-        @Pattern(regexp = "[.]{11}", message = "invalid format")
+        @Pattern(regexp = "[0-9\\-]{11}", message = "invalid format, should be xxx-xxx-xxx")
+        @Valid
         String ssn,
         @NotNull
         @Valid
