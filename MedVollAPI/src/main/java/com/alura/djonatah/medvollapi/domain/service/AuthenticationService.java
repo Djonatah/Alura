@@ -1,6 +1,6 @@
 package com.alura.djonatah.medvollapi.domain.service;
 
-import com.alura.djonatah.medvollapi.domain.dataaccess.UserRepository;
+import com.alura.djonatah.medvollapi.domain.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -5,11 +5,11 @@ import com.alura.djonatah.medvollapi.domain.model.common.AddressData;
 import com.alura.djonatah.medvollapi.domain.model.patient.Patient;
 import com.alura.djonatah.medvollapi.domain.model.patient.PatientUpdateData;
 
-public class PatientUpdate {
+public class PatientService {
     Patient patient;
     Address address;
 
-    public PatientUpdate(Patient patient){
+    public PatientService(Patient patient){
         this.patient = patient;
         this.address = patient.getAddress();
     }

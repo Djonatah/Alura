@@ -1,4 +1,4 @@
-package com.alura.djonatah.medvollapi.domain.dataaccess;
+package com.alura.djonatah.medvollapi.domain.repositories;
 
 import com.alura.djonatah.medvollapi.domain.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

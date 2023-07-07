@@ -1,8 +1,7 @@
 package com.alura.djonatah.medvollapi.controller;
 
-import com.alura.djonatah.medvollapi.domain.dataaccess.DoctorRepository;
 import com.alura.djonatah.medvollapi.domain.model.doctor.*;
-import com.alura.djonatah.medvollapi.domain.service.DoctorUpdate;
+import com.alura.djonatah.medvollapi.domain.service.DoctorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,48 +17,39 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class DoctorController {
 
     @Autowired
-    private DoctorRepository doctorRepository;
+    DoctorService doctorService = null;
 
     @PostMapping
     @Transactional
     public ResponseEntity register(@RequestBody @Valid DoctorRegisterData doctorData, UriComponentsBuilder uriBuilder){
-        Doctor doc = new Doctor(doctorData);
-        doctorRepository.save(doc);
-
+        Doctor doc = doctorService.create(doctorData);
         var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(doc.getId()).toUri();
-
         return ResponseEntity.created(uri).body(new DoctorDetailData(doc));
     }
 
     @GetMapping
     public ResponseEntity<Page<DoctorListData>> list(@PageableDefault(sort = "name") Pageable pageable){
-        Page page = doctorRepository.findAllByActiveTrue(pageable).map(DoctorListData::new);
+        Page page = doctorService.list(pageable);
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DoctorDetailData> get(@PathVariable Long id) {
-        var doctor = doctorRepository.getReferenceById(id);
-        return ResponseEntity.ok(new DoctorDetailData(doctor));
+        var doctorData = doctorService.get(id);
+        return ResponseEntity.ok(doctorData);
     }
 
     @PutMapping
     @Transactional
     public ResponseEntity<DoctorDetailData> update(@RequestBody @Valid DoctorUpdateData doctorData){
-        System.out.println(doctorData);
-        var doctor = doctorRepository.getReferenceById(doctorData.id());
-        var doctorUpdate = new DoctorUpdate(doctor);
-        doctorUpdate.update(doctorData);
-
+        var doctor = doctorService.update(doctorData);
         return ResponseEntity.ok(new DoctorDetailData(doctor));
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity delete(@PathVariable Long id){
-        var doctor = doctorRepository.getReferenceById(id);
-        var doctorUpdate = new DoctorUpdate(doctor);
-        doctorUpdate.delete (doctor);
+        doctorService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

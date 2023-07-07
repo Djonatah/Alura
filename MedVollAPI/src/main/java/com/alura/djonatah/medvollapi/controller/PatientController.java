@@ -1,8 +1,8 @@
 package com.alura.djonatah.medvollapi.controller;
 
 import com.alura.djonatah.medvollapi.domain.model.patient.*;
-import com.alura.djonatah.medvollapi.domain.dataaccess.PatientRepository;
-import com.alura.djonatah.medvollapi.domain.service.PatientUpdate;
+import com.alura.djonatah.medvollapi.domain.repositories.PatientRepository;
+import com.alura.djonatah.medvollapi.domain.service.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -45,7 +45,7 @@ public class PatientController {
     @Transactional
     public ResponseEntity update(@RequestBody @Valid PatientUpdateData patientUpdateData){
         var patient = patientRepository.getReferenceById(patientUpdateData.id());
-        PatientUpdate patientUpdate = new PatientUpdate(patient);
+        PatientService patientUpdate = new PatientService(patient);
         patientUpdate.update(patientUpdateData);
         return ResponseEntity.ok(new PatientDetailData(patient));
     }
@@ -54,7 +54,7 @@ public class PatientController {
     @Transactional
     public ResponseEntity update(@PathVariable @Valid Long id){
         var patient = patientRepository.getReferenceById(id);
-        PatientUpdate patientUpdate = new PatientUpdate(patient);
+        PatientService patientUpdate = new PatientService(patient);
         patientUpdate.delete(patient);
         return ResponseEntity.noContent().build();
     }
