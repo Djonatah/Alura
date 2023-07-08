@@ -1,5 +1,6 @@
 package com.alura.djonatah.medvollapi.infrastrcture.errorhandling;
 
+import com.alura.djonatah.medvollapi.domain.model.appointment.DataValidationException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -19,6 +20,12 @@ public class ErrorHandling {
     public ResponseEntity errorHandling400(MethodArgumentNotValidException exception){
         var listOfErrors = exception.getFieldErrors();
         return ResponseEntity.badRequest().body(listOfErrors.stream().map( t-> new FieldError400(t)).toList());
+    }
+
+    @ExceptionHandler(DataValidationException.class)
+    public ResponseEntity errorHandlingDataValidation(DataValidationException exception){
+        var errorMessage = exception.getMessage();
+        return ResponseEntity.badRequest().body(errorMessage);
     }
 
     private record FieldError400(String field, String errorMessage){

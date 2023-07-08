@@ -1,5 +1,6 @@
 package com.alura.djonatah.medvollapi.controller;
 
+import com.alura.djonatah.medvollapi.domain.model.appointment.AppointmentCancelData;
 import com.alura.djonatah.medvollapi.domain.model.appointment.AppointmentData;
 import com.alura.djonatah.medvollapi.domain.model.appointment.AppointmentDetailData;
 import com.alura.djonatah.medvollapi.domain.service.AppointmentService;
@@ -29,7 +30,8 @@ public class AppointmentController {
 
     @DeleteMapping
     @Transactional
-    public ResponseEntity<AppointmentDetailData> cancel(@RequestBody @Valid AppointmentData appointmentData){
+    public ResponseEntity<AppointmentDetailData> cancel(@RequestBody @Valid AppointmentCancelData appointmentCancelData){
+        appointmentService.cancel(appointmentCancelData);
         return ResponseEntity.noContent().build();
     }
 }

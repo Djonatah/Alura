@@ -1,17 +1,21 @@
 package com.alura.djonatah.medvollapi.domain.model.appointment.validation;
 
+import com.alura.djonatah.medvollapi.domain.model.appointment.AppointmentData;
+import com.alura.djonatah.medvollapi.domain.model.appointment.DataValidationException;
+import org.springframework.stereotype.Component;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 
-public class AppointmentWorkingHoursDateValidation {
-    public boolean isValid(LocalDateTime appointmentDate){
-        DayOfWeek dayOfWeek = appointmentDate.getDayOfWeek();
-        if(dayOfWeek.equals(DayOfWeek.SUNDAY))
-            return false;
+@Component
+public class AppointmentWorkingHoursDateValidation implements AppointmentScheduleValidation{
 
-        int hour = appointmentDate.getHour();
-        if (hour < 7 || hour > 18)
-            return false;
-        return true;
+    public void validate(AppointmentData appointmentData){
+        LocalDateTime appointmentDate = appointmentData.date();
+        var dayOfWeek = appointmentDate.getDayOfWeek();
+        var hour = appointmentDate.getHour();
+        if (dayOfWeek.equals(DayOfWeek.SUNDAY) || hour < 7 || hour > 18)
+            throw new DataValidationException("Unable to schedule appointment. Schedule date should be Monday through Friday / 7AM-7PM");
+
     }
 }

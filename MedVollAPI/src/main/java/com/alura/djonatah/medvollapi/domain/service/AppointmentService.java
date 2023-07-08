@@ -1,5 +1,7 @@
 package com.alura.djonatah.medvollapi.domain.service;
 
+import com.alura.djonatah.medvollapi.domain.model.appointment.validation.AppointmentCancelValitation;
+import com.alura.djonatah.medvollapi.domain.model.appointment.validation.AppointmentScheduleValidation;
 import com.alura.djonatah.medvollapi.domain.repositories.AppointmentRepository;
 import com.alura.djonatah.medvollapi.domain.repositories.DoctorRepository;
 import com.alura.djonatah.medvollapi.domain.repositories.PatientRepository;
@@ -12,6 +14,9 @@ import com.alura.djonatah.medvollapi.domain.model.patient.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 public class AppointmentService {
 
@@ -21,20 +26,32 @@ public class AppointmentService {
     private DoctorRepository doctorRepository;
     @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private List<AppointmentScheduleValidation> appointmentScheduleValidations;
+    @Autowired
+    private List<AppointmentCancelValitation> appointmentCancelValitations;
 
     public void cancel(AppointmentCancelData cancelData) throws DataValidationException {
         if(! appointmentRepository.existsById(cancelData.appointmentId()))
             throw new DataValidationException("Unable to find appointment in db");
 
         var appointment = appointmentRepository.getReferenceById(cancelData.appointmentId());
+
+        appointmentCancelValitations.stream().forEach(t -> t.validate(cancelData));
+
         appointment.setCancelReason(cancelData.reason());
     }
+
 
     public Appointment schedule(AppointmentData appointmentData) throws DataValidationException {
         var patient = getPatientFromDB(appointmentData.patientId());
         var doctor = selectDoctorForAppointment(appointmentData);
         var appointment = new Appointment(null,doctor, patient, appointmentData.date(), null);
+
+        appointmentScheduleValidations.stream().forEach( t -> t.validate(appointmentData));
+
         appointmentRepository.save(appointment);
+
         return appointment;
     }
 
@@ -45,9 +62,6 @@ public class AppointmentService {
         }
 
         var patient = patientRepository.findById(patientId).get();
-        if(! patient.isActive())
-            throw new DataValidationException("Patient is set as disabled: " +patientId);
-
         return patient;
     }
 
