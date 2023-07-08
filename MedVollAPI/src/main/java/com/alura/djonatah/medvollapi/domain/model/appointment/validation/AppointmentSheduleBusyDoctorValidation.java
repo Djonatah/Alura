@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 @Component
 public class AppointmentSheduleBusyDoctorValidation implements AppointmentScheduleValidation{
 
+    @Autowired
     AppointmentRepository appointmentRepository;
 
-    @Autowired
     public void validate(AppointmentData appointmentData){
         var now = LocalDateTime.now();
         var doctorId = appointmentData.doctorId();

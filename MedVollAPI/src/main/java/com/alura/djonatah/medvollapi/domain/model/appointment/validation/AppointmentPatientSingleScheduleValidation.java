@@ -17,7 +17,7 @@ public class AppointmentPatientSingleScheduleValidation implements AppointmentSc
         var appointmentDate = appointmentData.date();
         var start = appointmentDate.withHour(7);
         var end = appointmentDate.withHour(18);
-        if(!appointmentRepository.existsByPatientIdAndDateBetween(patientId, start, end))
+        if(appointmentRepository.existsByPatientIdAndDateBetween(patientId, start, end))
                 throw new DataValidationException("Patient is already scheduled for an appointment in the same day");
         }
     }

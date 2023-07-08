@@ -9,9 +9,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Component
-public class AppointmentSheduleMinimumTimeValidation {
+public class AppointmentSheduleMinimumTimeValidation implements AppointmentScheduleValidation{
 
-    @Autowired
     public void validate(AppointmentData appointmentData){
         var now = LocalDateTime.now();
         var scheduleDate = appointmentData.date();

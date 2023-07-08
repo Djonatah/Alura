@@ -73,7 +73,12 @@ public class AppointmentService {
     }
 
     private Doctor pickCalendarFreeDoctorForAppointment(AppointmentData appointmentData) throws DataValidationException {
-        var doctor = doctorRepository.selectCalendarFreeDoctorForAppointment(appointmentData.speciality(), appointmentData.date());
+        var speciality = appointmentData.speciality();
+        if(speciality == null){
+            throw new DataValidationException("When doctor is not specified, speciality is a required field");
+        }
+
+        var doctor = doctorRepository.selectCalendarFreeDoctorForAppointment(speciality, appointmentData.date());
         if(doctor == null){
             throw new DataValidationException("Unable to select doctor for appointment: " + appointmentData.patientId());
         }

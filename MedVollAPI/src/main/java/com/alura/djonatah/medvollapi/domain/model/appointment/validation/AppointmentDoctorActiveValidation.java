@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppointmentDoctorActiveValidation implements AppointmentScheduleValidation{
 
+    @Autowired
     DoctorRepository doctorRepository;
 
-    @Autowired
     public void validate(AppointmentData appointmentData){
         var doctorId = appointmentData.doctorId();
         if(doctorId == null)
