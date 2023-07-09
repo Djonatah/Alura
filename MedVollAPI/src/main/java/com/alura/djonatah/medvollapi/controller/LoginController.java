@@ -4,6 +4,7 @@ import com.alura.djonatah.medvollapi.domain.model.user.User;
 import com.alura.djonatah.medvollapi.domain.model.user.UserData;
 import com.alura.djonatah.medvollapi.infrastrcture.security.JWTTokenData;
 import com.alura.djonatah.medvollapi.infrastrcture.security.TokenService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("login")
+@SecurityRequirement(name = "bearer-key")
 public class LoginController {
 
     @Autowired

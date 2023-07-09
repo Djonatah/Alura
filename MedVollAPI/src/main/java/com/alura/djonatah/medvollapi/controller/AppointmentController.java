@@ -4,6 +4,8 @@ import com.alura.djonatah.medvollapi.domain.model.appointment.AppointmentCancelD
 import com.alura.djonatah.medvollapi.domain.model.appointment.AppointmentData;
 import com.alura.djonatah.medvollapi.domain.model.appointment.AppointmentDetailData;
 import com.alura.djonatah.medvollapi.domain.service.AppointmentService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/appointment")
+@SecurityRequirement(name = "bearer-key")
 public class AppointmentController {
 
     @Autowired

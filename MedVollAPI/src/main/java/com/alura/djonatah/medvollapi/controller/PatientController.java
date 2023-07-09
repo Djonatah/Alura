@@ -3,6 +3,7 @@ package com.alura.djonatah.medvollapi.controller;
 import com.alura.djonatah.medvollapi.domain.model.patient.*;
 import com.alura.djonatah.medvollapi.domain.repositories.PatientRepository;
 import com.alura.djonatah.medvollapi.domain.service.PatientService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("patient")
+@SecurityRequirement(name = "bearer-key")
 public class PatientController {
 
     @Autowired
