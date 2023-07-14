@@ -1,6 +1,5 @@
 package com.alura.djonatah.medvollapi.domain.model.appointment.validation;
 
-import com.alura.djonatah.medvollapi.domain.model.appointment.Appointment;
 import com.alura.djonatah.medvollapi.domain.model.appointment.AppointmentCancelData;
 import com.alura.djonatah.medvollapi.domain.model.appointment.DataValidationException;
 import com.alura.djonatah.medvollapi.domain.repositories.AppointmentRepository;

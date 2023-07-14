@@ -2,7 +2,6 @@ package com.alura.djonatah.medvollapi.domain.model.appointment.validation;
 
 import com.alura.djonatah.medvollapi.domain.model.appointment.AppointmentData;
 import com.alura.djonatah.medvollapi.domain.model.appointment.DataValidationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;

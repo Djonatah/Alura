@@ -17,8 +17,8 @@ public class AppointmentDoctorActiveValidation implements AppointmentScheduleVal
         if(doctorId == null)
             return;
 
-        var doctor = doctorRepository.findById(doctorId);
-        if(doctor.isEmpty() || !doctor.get().isActive())
-                throw new DataValidationException("Doctor is set as disabled: " +doctorId);
+        var doctor = doctorRepository.findByIdAndActiveFalse(doctorId);
+        if(doctor != null)
+            throw new DataValidationException("Doctor is set as disabled: " +doctorId);
     }
 }

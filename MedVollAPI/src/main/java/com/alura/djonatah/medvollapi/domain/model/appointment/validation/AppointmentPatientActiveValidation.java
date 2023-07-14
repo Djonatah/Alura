@@ -14,8 +14,8 @@ public class AppointmentPatientActiveValidation implements AppointmentScheduleVa
 
     public void validate(AppointmentData appointmentData){
         var patientId = appointmentData.patientId();
-        var patient = patientRepository.findById(patientId);
-        if(patient.isEmpty() || !patient.get().isActive())
+        var patient = patientRepository.findByIdAndActiveFalse(patientId);
+        if(patient != null)
             throw new DataValidationException("Patient is set as disabled: " +patientId);
     }
 }

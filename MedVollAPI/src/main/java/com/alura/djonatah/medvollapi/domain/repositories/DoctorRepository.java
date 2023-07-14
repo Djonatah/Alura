@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     Page<Doctor> findAllByActiveTrue(Pageable pageable);
+    Doctor findByIdAndActiveFalse(Long id);
     @Query("""
             select d
             from Doctor d
